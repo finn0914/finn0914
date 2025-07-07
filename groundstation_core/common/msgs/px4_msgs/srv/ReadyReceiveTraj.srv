@@ -1,0 +1,4 @@
+bool[3] ready_receive_traj
+---
+bool success
+string message

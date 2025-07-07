@@ -1,0 +1,10 @@
+builtin_interfaces/Time drone_time
+float32 x
+float32 y
+float32 z
+float32 vx
+float32 vy
+float32 vz
+int32 roll_degree
+int32 pitch_degree
+int32 yaw_degree

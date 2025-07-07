@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+
+  <!-- ─────────────── Global arguments ─────────────── -->
+   <arg name="run_mode"                  default="sim"   description="Operating mode: real | sim"/>
+
+  <group if="$(eval &quot;'$(var run_mode)'=='sim'&quot;)">
+    <arg name="use_sim_time"              default="true"  description="Use simulated clock"/>
+    <arg name="log_level"                 default="warn"  description="ROS 2 log severity"/>
+
+
+
+    <!-- ─────────────── Modules to be launched ─────────────── -->
+    <arg name="launch_groundstation_core" default="true"  description="Start ground-station core stack"/>
+    <arg name="launch_rviz"               default="true"  description="Start RViz visualiser"/>
+    <arg name="launch_planning" default="true" description="launch planning"/>
+    <arg name="launch_control"  default="true" description="launch control"/>
+    <arg name="launch_tf_tree"          default="true" description="launch control"/>
+    <arg name="drone101"                default="true" description="static Tfs related to drone101 are enabled"/>
+    <arg name="drone102"                default="true" description="static Tfs related to drone102 are enabled"/>
+    <arg name="drone103"                default="false" description="static Tfs related to drone103 are enabled"/>
+
+    <!-- RViz configuration (override from CLI if you want another file) -->
+    <arg name="rviz_config"
+        default="/home/uav/uav_universe/src/groundstation_core/common/rviz/config/uav_universe.rviz"
+        description="RViz2 configuration file"/>
+
+    <!-- ─────────────── Ground-station core (REAL) ─────────────── -->
+    <group if="$(var launch_groundstation_core)">
+      <include file="$(find-pkg-share groundstation_launch)/launch/groundstation.launch.xml">
+        <arg name="log_level"         value="$(var log_level)"/>
+        <arg name="use_sim_time"      value="$(var use_sim_time)"/>
+        <arg name="run_mode"                 value="$(var run_mode)"/>
+        <arg name="launch_planning"   value="$(var launch_planning)"/>
+        <arg name="launch_control"    value="$(var launch_control)"/>
+        <arg name="launch_tf_tree"    value="$(var launch_tf_tree)"/>
+        <arg name="drone101"          value="$(var drone101)"/>
+        <arg name="drone102"          value="$(var drone102)"/>
+        <arg name="drone103"          value="$(var drone103)"/>
+
+      </include>
+    </group>
+    <!-- ─────────────── Ground-station core (SIM) ─────────────── -->
+    <!--  NB: no spaces in the expression  -->
+    <group if="$(eval &quot;'$(var run_mode)'=='sim'&quot;)">
+        <include file="$(find-pkg-share groundstation_launch)/launch/groundstation_sim.launch.py">
+          <arg name="log_level"   value="$(var log_level)"/>
+        </include>
+      </group>
+
+      <!-- ─────────────── Visualisation ─────────────── -->
+      <group if="$(var launch_rviz)">
+        <include file="$(find-pkg-share drone_info_rviz)/launch/show_drone_rviz.launch.py">
+          <arg name="mode"        value="$(var run_mode)"/>
+          <arg name="log_level"   value="$(var log_level)"/>
+          <arg name="rviz_config" value="$(var rviz_config)"/>
+        </include>
+      </group>
+  </group>
+  <group if="$(eval &quot;'$(var run_mode)'=='real'&quot;)">
+    <!-- <group if="$(var launch_rviz)"> -->
+      <include file="$(find-pkg-share station_tcp_connection)/launch/station_tcp_connection.launch.xml">
+
+      </include>
+    <!-- </group> -->
+<!-- ros2 run station_flight stationui_backend.py -->
+
+<!-- ros2 launch station_tcp_connection station_tcp_connection.launch.xml  -->
+
+  </group>
+
+</launch>

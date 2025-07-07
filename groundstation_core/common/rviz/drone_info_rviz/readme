@@ -1,0 +1,6 @@
+sudo apt update
+sudo apt install ros-humble-rviz-visual-tools
+source /opt/ros/humble/setup.bash
+#verfy th eheader :
+ls /opt/ros/humble/include/rviz_visual_tools/rviz_visual_tools.h
+# should print the path, not “No such file or directory”

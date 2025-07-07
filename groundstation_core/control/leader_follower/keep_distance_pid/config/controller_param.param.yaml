@@ -1,0 +1,19 @@
+/**:
+  ros__parameters:
+      #choose the controller pid, mpc, cbf...
+      controller_name: 'pid'
+      # x channel
+      kpx: 1.0
+      kix: 0.4
+      kdx: 0.05
+      # y channel
+      kpy: 1.0
+      kiy: 0.4
+      kdy: 0.05
+      # z channel
+      kpz: 1.2 
+      kiz: 0.5
+      kdz: 0.05
+      # follower distance from leader
+      distance: 1.0
+

@@ -1,0 +1,11 @@
+<library path="stationui_frontend_rviz_plugin">
+  <class
+    name="stationui_frontend_rviz_plugin::MainPanel"
+    type="stationui_frontend_rviz_plugin::MainPanel"
+    base_class_type="rviz_common::Panel"
+  >
+    <description>
+      Main panel of the station ui frontend.
+    </description>
+  </class>
+</library>

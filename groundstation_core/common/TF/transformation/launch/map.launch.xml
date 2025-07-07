@@ -1,0 +1,33 @@
+<launch>
+    <!-- (x,y,z) -> (y,x,-z) is equvalent to -->
+    <!-- (roll 180deg, yaw 90deg) in intrinsic x-y-z Euler angles -->
+    <node
+        pkg="tf2_ros"
+        exec="static_transform_publisher"
+        output="screen"
+        name="tf2_map_enu_to_ned"
+        args="--x 0 --y 0 --z 0
+              --roll 3.1416 --pitch 0 --yaw 1.5708
+              --frame-id map
+              --child-frame-id map_ned"
+    />
+    <!-- specify north yaw bias, in radians -->
+    <!-- 67 deg ~= 1.17 rad -->
+    <node
+        pkg="tf2_ros"
+        exec="static_transform_publisher"
+        output="screen"
+        name="tf2_map_ned_to_px4"
+        args="--x 0 --y 0 --z 0
+              --roll 0 --pitch 0 --yaw 1.17
+              --frame-id map_ned
+              --child-frame-id map_px4"
+    />
+
+    <node
+        pkg="transformation"
+        exec="drone_tf_broadcaster"
+        output="screen"
+        name="drone101_tf_broadcaster"
+    />
+</launch>

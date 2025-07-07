@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<launch>
+    <!-- <let name="initialpose_config_path" value="$(find-pkg-share phoenix_launch)/config/localization"/> -->
+
+    <!-- <arg name="initialpose_path" default="$(var initialpose_config_path)/publish_initialpose.param.yaml"/> -->
+
+  <node pkg="station_tcp_connection" exec="station_tcp_connection" name="station_tcp_connection_node" output="screen">
+    <!-- <param from="$(var initialpose_path)"/> -->
+      </node>
+  <!-- <node pkg="station_tcp_connection" exec="station_tcp_connection" name="station_tcp_connection_node_102" output="screen">
+
+  </node> -->
+</launch>

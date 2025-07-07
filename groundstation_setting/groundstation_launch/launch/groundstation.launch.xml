@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+
+  <!-- Global parameters -->
+  <arg name="use_sim_time"              default="true" description="use_sim_time"/>
+  <arg name="log_level"                 default="info"  description="ROS 2 log severity"/>
+  <arg name="run_mode"                  default="sim"   description="Operating mode: real | sim"/>
+
+  <!-- Modules to be launched -->
+  <arg name="launch_planning" default="true" description="launch planning"/>
+  <arg name="launch_control"  default="true" description="launch control"/>
+
+  <arg name="launch_tf_tree"          default="false" description="launch control"/>
+  <arg name="drone101"                default="true" description="static Tfs related to drone101 are enabled"/>
+  <arg name="drone102"                default="true" description="static Tfs related to drone102 are enabled"/>
+  <arg name="drone103"                default="false" description="static Tfs related to drone103 are enabled"/>
+
+  <!-- Global parameters -->
+   <group if="$(var launch_control)">
+    <include file="$(find-pkg-share keep_distance_pid)/launch/keep_distance_pid.launch.py">
+      <!-- <arg name="use_sim_time" value="$(var use_sim_time)"/> -->
+      <arg name="log_level"                 value="$(var log_level)"/>
+
+    </include>
+  </group>
+
+   <group if="$(var launch_planning)">
+    <include file="$(find-pkg-share generate_trajectory)/launch/generate_trajectory.launch.py">
+      <!-- <arg name="use_sim_time" value="$(var use_sim_time)"/> -->
+      <arg name="log_level"                 value="$(var log_level)"/>
+
+    </include>
+   </group>
+
+   <group if="$(var launch_tf_tree)">
+    <include file="$(find-pkg-share tf_tree)/launch/tf_tree.launch.py">
+      <arg name="run_mode"                 value="$(var run_mode)"/>
+      <arg name="log_level"                 value="$(var log_level)"/>
+      <arg name="drone101"                  value="$(var drone101)"/>
+      <arg name="drone102"                  value="$(var drone102)"/>
+      <arg name="drone103"                  value="$(var drone103)"/>
+    </include>
+   </group>
+
+
+</launch>

@@ -1,0 +1,4 @@
+bool traj_trigger
+---
+bool success
+string message

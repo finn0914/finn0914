@@ -1,0 +1,5 @@
+/**:
+  ros__parameters:
+      #number of agents requested inside the gazebo
+      num_agents: 2
+

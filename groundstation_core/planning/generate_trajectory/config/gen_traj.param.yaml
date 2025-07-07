@@ -1,0 +1,32 @@
+/**:
+  ros__parameters:
+    # Common parameters
+    setpoint_delay: 100
+    sim_real: "sim"  # Changes the trajectory setpoint topic name
+    
+    # Drone-specific configurations
+    drones:
+      drone101:
+        path:
+          shape: "square"      # Options could be "square", "circle", "triangle", etc.
+          resolution: 1000       # For example, number of points along the path
+          ratio: 4.0             # Custom ratio for the shape (if applicable)
+          only_line: [1, 1, 0]   # Boolean flags for line generation along each axis
+        start_pose: [2.0, 2.0, 4.0]
+        yaw_align_velocity: true
+        
+      drone102:
+        path:
+          shape: "circle"
+          resolution: 1000
+          ratio: 4.0             # For a circle, this might remain 1.0 unless you want an ellipse
+          only_line: [1, 1, 0]
+        start_pose: [3.0, 3.0, 4.0]
+        
+      drone103:
+        path:
+          shape: "triangle"      # Triangle shape doesn't exist!
+          resolution: 1000          # For a triangle, resolution could indicate number of vertices or segments
+          ratio: 4.0             # For example, a custom factor to adjust proportions
+          only_line: [1, 1, 0]
+        start_pose: [4.0, 4.0, 1.0]

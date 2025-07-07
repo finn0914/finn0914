@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="max_depth" default="10.0" />
+  <arg name="use_sim_time" default="true" description="use_sim_time"/>
+
+
+    <!-- <node pkg="tf2_ros" exec="static_transform_publisher" name="static_transform_publisher_Dr103_camera" args="-0.25 0.0 -0.25 1.57 0 -1.57 /drone103/base_link /drone103/camera_depth_tf" />
+    <node pkg="tf2_ros" exec="static_transform_publisher" name="static_transform_publisher_Dr102_camera" args="-0.25 0.0 -0.25 1.57 0 -1.57 /drone102/base_link /drone102/camera_depth_tf" />
+    <node pkg="tf2_ros" exec="static_transform_publisher" name="static_transform_publisher_Dr101_camera" args="-0.25 0.0 -0.25 1.57 0 -1.57 /drone101/base_link /drone101/camera_depth_tf" /> -->
+
+    <!-- <node pkg="tf2_ros" exec="static_transform_publisher" name="static_transform_publisher_camera" args="10.0 10.0 1 0 0 0 /map /drone103/base_link" /> -->
+
+  <node pkg="station_pointcloud" exec="station_pointcloud" name="to_point_cloud_node" output="screen">
+    <param name="max_depth" value="$(var max_depth)"/>
+    <param name="fx" value="322.282410"/>
+    <param name="fy" value="322.282410"/>
+    <param name="cx" value="320.818268"/>
+    <param name="cy" value="178.779297"/>
+    <param name="threshold_color_depth_topics" value="1.5"/>
+    <param name="use_sim_time" value="$(var use_sim_time)"/>
+
+  </node>
+</launch>

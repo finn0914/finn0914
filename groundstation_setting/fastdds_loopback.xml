@@ -1,0 +1,29 @@
+<participant is_default_profile="true" profile_name="localhost_participant">
+  <domainId>100</domainId>
+
+  <!-- leave builtin transports ON (includes SHM)                     -->
+  <!-- then disable the default UDP transport and add our own loopback -->
+  <rtps>
+    <useBuiltinTransports>true</useBuiltinTransports>
+    <builtin>
+      <!-- disable the default UDPv4 transport so it never picks Wi-Fi -->
+      <metatrafficUnicastLocatorList>
+        <locator>
+          <kind>UDPv4</kind>
+          <port>0</port>            <!-- 0 = disabled -->
+        </locator>
+      </metatrafficUnicastLocatorList>
+      <metatrafficMulticastLocatorList>
+        <locator>
+          <kind>UDPv4</kind>
+          <port>0</port>
+        </locator>
+      </metatrafficMulticastLocatorList>
+    </builtin>
+
+    <!-- user-defined UDP transport bound to loop-back only -->
+    <userTransports>
+      <transport_id>udp_local</transport_id>
+    </userTransports>
+  </rtps>
+</participant>

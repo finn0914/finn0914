@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<library path="control_panel_rviz_plugin">
+  <class name="control_panel_rviz_plugin::HealthCheckPanel" type="control_panel_rviz_plugin::HealthCheckPanel" base_class_type="rviz_common::Panel">
+    <description>
+      A custom Health Check panel for RViz2.
+    </description>
+  </class>
+</library>
